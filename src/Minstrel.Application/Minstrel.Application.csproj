@@ -4,6 +4,13 @@
     <ProjectReference Include="..\Minstrel.Domain\Minstrel.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions/" />
+    <Folder Include="Abstractions/Providers/" />
+    <Folder Include="Librairy/" />
+    <Folder Include="Librairy/Services/" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
