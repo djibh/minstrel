@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Minstrel.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc6cfbd2dc0243e1966b306d4ca8132505a21e42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49df8366e67c1262163e5cbc46075f7fae8716d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Minstrel.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Minstrel.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
