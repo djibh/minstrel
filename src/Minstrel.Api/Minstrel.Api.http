@@ -1,0 +1,6 @@
+@Minstrel.Api_HostAddress = http://localhost:5063
+
+GET {{Minstrel.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
