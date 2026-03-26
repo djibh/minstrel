@@ -1,57 +1,69 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{52D89598-42B1-46C2-8E16-56E22F8E42E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Api", "src\Minstrel.Api\Minstrel.Api.csproj", "{E0469F50-0397-400E-9A9D-D5597834E33B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Application", "src\Minstrel.Application\Minstrel.Application.csproj", "{069C4B89-3575-4CE1-AC8F-E7E212A16EF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.UnitTests", "tests\Minstrel.UnitTests\Minstrel.UnitTests.csproj", "{3B714A91-07D9-5620-D6C6-EE5CBD582C09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Domain", "src\Minstrel.Domain\Minstrel.Domain.csproj", "{77B0A246-465F-4B69-B961-AF2D260633D3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minstrel.IntegrationTests", "Minstrel.IntegrationTests", "{7196B06C-E6FB-00E3-FED1-B0F6389D467D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Infrastructure", "src\Minstrel.Infrastructure\Minstrel.Infrastructure.csproj", "{1C444E40-6240-41EF-9B63-B4DC57C95285}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.UnitTests", "tests\Minstrel.IntegrationTests\Minstrel.UnitTests.csproj", "{16D0E101-B9AC-4C5C-8C2E-81DBCC24F92E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F6AD290A-2385-41FF-9DC3-A1BDB09B45FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Application", "src\Minstrel.Application\Minstrel.Application.csproj", "{C7084B82-2079-4DF9-07CC-0C0EAD878442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.UnitTests", "tests\Minstrel.UnitTests\Minstrel.UnitTests.csproj", "{8292C2E3-9023-4C92-8053-3B2B7E227EE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Api", "src\Minstrel.Api\Minstrel.Api.csproj", "{17BA2D2B-AF0D-90D9-4545-DEF1433B8975}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Infrastructure", "src\Minstrel.Infrastructure\Minstrel.Infrastructure.csproj", "{9A8E158D-9A94-3943-5F46-A9C934DA7000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minstrel.Domain", "src\Minstrel.Domain\Minstrel.Domain.csproj", "{A0B31050-FCA8-408B-C599-DCC2B751E5ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B714A91-07D9-5620-D6C6-EE5CBD582C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B714A91-07D9-5620-D6C6-EE5CBD582C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B714A91-07D9-5620-D6C6-EE5CBD582C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B714A91-07D9-5620-D6C6-EE5CBD582C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D0E101-B9AC-4C5C-8C2E-81DBCC24F92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D0E101-B9AC-4C5C-8C2E-81DBCC24F92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D0E101-B9AC-4C5C-8C2E-81DBCC24F92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D0E101-B9AC-4C5C-8C2E-81DBCC24F92E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7084B82-2079-4DF9-07CC-0C0EAD878442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7084B82-2079-4DF9-07CC-0C0EAD878442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7084B82-2079-4DF9-07CC-0C0EAD878442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7084B82-2079-4DF9-07CC-0C0EAD878442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17BA2D2B-AF0D-90D9-4545-DEF1433B8975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17BA2D2B-AF0D-90D9-4545-DEF1433B8975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17BA2D2B-AF0D-90D9-4545-DEF1433B8975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17BA2D2B-AF0D-90D9-4545-DEF1433B8975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A8E158D-9A94-3943-5F46-A9C934DA7000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A8E158D-9A94-3943-5F46-A9C934DA7000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A8E158D-9A94-3943-5F46-A9C934DA7000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A8E158D-9A94-3943-5F46-A9C934DA7000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B31050-FCA8-408B-C599-DCC2B751E5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B31050-FCA8-408B-C599-DCC2B751E5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B31050-FCA8-408B-C599-DCC2B751E5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B31050-FCA8-408B-C599-DCC2B751E5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E0469F50-0397-400E-9A9D-D5597834E33B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0469F50-0397-400E-9A9D-D5597834E33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0469F50-0397-400E-9A9D-D5597834E33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0469F50-0397-400E-9A9D-D5597834E33B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{069C4B89-3575-4CE1-AC8F-E7E212A16EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{069C4B89-3575-4CE1-AC8F-E7E212A16EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{069C4B89-3575-4CE1-AC8F-E7E212A16EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{069C4B89-3575-4CE1-AC8F-E7E212A16EF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77B0A246-465F-4B69-B961-AF2D260633D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77B0A246-465F-4B69-B961-AF2D260633D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77B0A246-465F-4B69-B961-AF2D260633D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77B0A246-465F-4B69-B961-AF2D260633D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C444E40-6240-41EF-9B63-B4DC57C95285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C444E40-6240-41EF-9B63-B4DC57C95285}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C444E40-6240-41EF-9B63-B4DC57C95285}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C444E40-6240-41EF-9B63-B4DC57C95285}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8292C2E3-9023-4C92-8053-3B2B7E227EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8292C2E3-9023-4C92-8053-3B2B7E227EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8292C2E3-9023-4C92-8053-3B2B7E227EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8292C2E3-9023-4C92-8053-3B2B7E227EE4}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E0469F50-0397-400E-9A9D-D5597834E33B} = {52D89598-42B1-46C2-8E16-56E22F8E42E5}
-		{069C4B89-3575-4CE1-AC8F-E7E212A16EF4} = {52D89598-42B1-46C2-8E16-56E22F8E42E5}
-		{77B0A246-465F-4B69-B961-AF2D260633D3} = {52D89598-42B1-46C2-8E16-56E22F8E42E5}
-		{1C444E40-6240-41EF-9B63-B4DC57C95285} = {52D89598-42B1-46C2-8E16-56E22F8E42E5}
-		{8292C2E3-9023-4C92-8053-3B2B7E227EE4} = {F6AD290A-2385-41FF-9DC3-A1BDB09B45FB}
+		{3B714A91-07D9-5620-D6C6-EE5CBD582C09} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{7196B06C-E6FB-00E3-FED1-B0F6389D467D} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{16D0E101-B9AC-4C5C-8C2E-81DBCC24F92E} = {7196B06C-E6FB-00E3-FED1-B0F6389D467D}
+		{C7084B82-2079-4DF9-07CC-0C0EAD878442} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{17BA2D2B-AF0D-90D9-4545-DEF1433B8975} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{9A8E158D-9A94-3943-5F46-A9C934DA7000} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{A0B31050-FCA8-408B-C599-DCC2B751E5ED} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3503DA41-D4C6-4F84-8E9E-2F75F87583AA}
 	EndGlobalSection
 EndGlobal

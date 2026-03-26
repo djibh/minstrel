@@ -9,6 +9,8 @@
     <Folder Include="Abstractions/Providers/" />
     <Folder Include="Librairy/" />
     <Folder Include="Librairy/Services/" />
+    <Folder Include="Search/" />
+    <Folder Include="Search/Services/" />
   </ItemGroup>
 
   <PropertyGroup>

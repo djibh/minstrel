@@ -5513,11 +5513,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/djibh/Documents/Workspace/tests/Minstrel.IntegrationTests/Minstrel.UnitTests.csproj",
+      "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.IntegrationTests/Minstrel.UnitTests.csproj",
       "projectName": "Minstrel.UnitTests",
-      "projectPath": "/Users/djibh/Documents/Workspace/tests/Minstrel.IntegrationTests/Minstrel.UnitTests.csproj",
+      "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.IntegrationTests/Minstrel.UnitTests.csproj",
       "packagesPath": "/Users/djibh/.nuget/packages/",
-      "outputPath": "/Users/djibh/Documents/Workspace/tests/Minstrel.IntegrationTests/obj/",
+      "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.IntegrationTests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/djibh/.nuget/NuGet/NuGet.Config"
