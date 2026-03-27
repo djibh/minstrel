@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Minstrel.UnitTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09fa806a61ec6a25ef9b0cf15c8936774d9b3c2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee35cce4d52ba8bb9c5b0c7de69ad7d9f3115e3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Minstrel.UnitTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Minstrel.UnitTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

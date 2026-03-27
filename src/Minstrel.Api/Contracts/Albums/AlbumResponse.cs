@@ -1,4 +1,4 @@
-namespace Minstrel.Api.Contacts.Albums;
+namespace Minstrel.Api.Contracts.Albums;
 
 public record AlbumResponse
 (

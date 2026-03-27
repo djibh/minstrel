@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Minstrel.Infrastructure\Minstrel.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers/" />
+    <Folder Include="Mapping/" />
+  </ItemGroup>
+
 </Project>
