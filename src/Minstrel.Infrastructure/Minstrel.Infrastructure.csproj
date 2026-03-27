@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DependencyInjection/" />
     <Folder Include="Providers/" />
     <Folder Include="Providers/Mock/" />
     <Folder Include="Sources/" />
