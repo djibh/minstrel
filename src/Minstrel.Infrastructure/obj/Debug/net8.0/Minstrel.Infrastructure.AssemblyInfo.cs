@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Minstrel.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee35cce4d52ba8bb9c5b0c7de69ad7d9f3115e3e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae586f7138c28cd19374fc6cc71a6092876704a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Minstrel.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Minstrel.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

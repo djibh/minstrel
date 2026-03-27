@@ -8,7 +8,7 @@ namespace Minstrel.Infrastructure.DependencyInjection;
 
 public static class InfrastructureServiceCollectionExtensions
 {
-    public static IServiceCollection AddMusicHubInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddMinstrelInfrastructure(this IServiceCollection services)
     {
         services.AddSingleton<IMediaSourceProvider, MockMediaSourceProvider>();
         services.AddSingleton<ISourceRegistry, SourceRegistry>();

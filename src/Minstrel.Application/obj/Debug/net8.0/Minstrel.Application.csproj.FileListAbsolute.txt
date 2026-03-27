@@ -1,0 +1,16 @@
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/bin/Debug/net8.0/Minstrel.Application.deps.json
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/bin/Debug/net8.0/Minstrel.Application.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/bin/Debug/net8.0/Minstrel.Application.pdb
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/bin/Debug/net8.0/Minstrel.Domain.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/bin/Debug/net8.0/Minstrel.Domain.pdb
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.csproj.AssemblyReference.cache
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.AssemblyInfoInputs.cache
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.AssemblyInfo.cs
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.csproj.CoreCompileInputs.cache
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.sourcelink.json
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.09A06AE3.Up2Date
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/refint/Minstrel.Application.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/Minstrel.Application.pdb
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/Debug/net8.0/ref/Minstrel.Application.dll

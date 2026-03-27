@@ -1,0 +1,12 @@
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/bin/Debug/net8.0/Minstrel.Domain.deps.json
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/bin/Debug/net8.0/Minstrel.Domain.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/bin/Debug/net8.0/Minstrel.Domain.pdb
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.AssemblyInfoInputs.cache
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.AssemblyInfo.cs
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.csproj.CoreCompileInputs.cache
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.sourcelink.json
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/refint/Minstrel.Domain.dll
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/Minstrel.Domain.pdb
+/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/Debug/net8.0/ref/Minstrel.Domain.dll
