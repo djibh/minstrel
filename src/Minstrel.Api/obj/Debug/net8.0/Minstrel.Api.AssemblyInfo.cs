@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Minstrel.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee35cce4d52ba8bb9c5b0c7de69ad7d9f3115e3e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a84e032aa370d7b711bbf5eedbeb126475ae8db1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Minstrel.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Minstrel.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

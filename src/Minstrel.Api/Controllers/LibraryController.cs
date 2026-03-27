@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Minstrel.Api.Contracts.Albums;
 using Minstrel.Api.Contracts.Artists;
