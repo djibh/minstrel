@@ -15,4 +15,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 
+// Temporary
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.Run();
