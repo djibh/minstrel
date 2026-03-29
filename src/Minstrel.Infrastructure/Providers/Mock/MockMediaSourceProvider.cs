@@ -165,9 +165,19 @@ public class MockMediaSourceProvider : IMediaSourceProvider
     }
 
     public Task<StreamDescriptor> GetTrackStreamAsync(string trackId, CancellationToken cancellationToken)
-        => Task.FromResult(new StreamDescriptor
+    {
+        var uri = trackId switch
         {
-            StreamUri = new Uri("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"),
+            "track-1" => "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+            "track-2" => "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+            "track-3" => "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+            _ => "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        };
+
+        return Task.FromResult(new StreamDescriptor
+        {
+            StreamUri = new Uri(uri),
             IsRedirectPreferred = true
         });
+    }
 }
