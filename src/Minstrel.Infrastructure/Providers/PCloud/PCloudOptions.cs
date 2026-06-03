@@ -8,5 +8,6 @@ public class PCloudOptions
     public string ClientSecret { get; set; } = string.Empty;
     public string RedirectUri { get; set; } = string.Empty;
     public string ApiBaseUrl { get; set; } = "https://eapi.pcloud.com";
+    public long? MusicFolderId { get; set; }
     public string MusicFolderPath { get; set; } = "/";
 }

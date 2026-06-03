@@ -22,21 +22,39 @@ public class PCloudApiClient
         _options = options.Value;
     }
 
-    public async Task<string> DirectAuthAsync(string email, string password, CancellationToken cancellationToken)
+    public async Task<bool> DirectAuthAsync(string email, string password, string? code, CancellationToken cancellationToken)
     {
-        var url = $"{_options.ApiBaseUrl}/userinfo" +
-                  $"?getauth=1&logout=1" +
-                  $"&username={Uri.EscapeDataString(email)}" +
-                  $"&password={Uri.EscapeDataString(password)}";
+        var response = await CallUserInfoAsync(_options.ApiBaseUrl, email, password, code, cancellationToken);
+        var resolvedBase = _options.ApiBaseUrl;
 
-        var client = _httpClientFactory.CreateClient();
-        var response = await client.GetFromJsonAsync<PCloudUserInfoResponse>(url, cancellationToken)
-            ?? throw new InvalidOperationException("Empty response from pCloud userinfo.");
+        // 1022 + hostname → wrong regional server, retry with the correct one
+        if (response.Result == 1022 && response.Hostname is not null)
+        {
+            resolvedBase = $"https://{response.Hostname}";
+            response = await CallUserInfoAsync(resolvedBase, email, password, code, cancellationToken);
+        }
+
+        // 1022 without hostname → email verification code required
+        if (response.Result == 1022 && response.Hostname is null)
+            return false;
 
         if (response.Result != 0 || response.AccessToken is null)
-            throw new InvalidOperationException($"pCloud auth error (result={response.Result}).");
+            throw new InvalidOperationException($"pCloud auth error (result={response.Result}): {response.Error}");
 
-        return response.AccessToken;
+        _tokenStore.SetToken(response.AccessToken, resolvedBase);
+        return true;
+    }
+
+    private async Task<PCloudUserInfoResponse> CallUserInfoAsync(string baseUrl, string email, string password, string? code, CancellationToken cancellationToken)
+    {
+        var url = $"{baseUrl}/userinfo?getauth=1" +
+                  $"&username={Uri.EscapeDataString(email)}" +
+                  $"&password={Uri.EscapeDataString(password)}" +
+                  (code is not null ? $"&code={Uri.EscapeDataString(code)}" : "");
+
+        var client = _httpClientFactory.CreateClient();
+        return await client.GetFromJsonAsync<PCloudUserInfoResponse>(url, cancellationToken)
+            ?? throw new InvalidOperationException("Empty response from pCloud userinfo.");
     }
 
     public async Task<List<PCloudItem>> ListAudioFilesAsync(string folderPath, CancellationToken cancellationToken)
@@ -44,10 +62,14 @@ public class PCloudApiClient
         var token = _tokenStore.GetToken()
             ?? throw new InvalidOperationException("No pCloud access token.");
 
-        var url = $"{_options.ApiBaseUrl}/listfolder" +
-                  $"?path={Uri.EscapeDataString(folderPath)}" +
-                  $"&recursive=1" +
-                  $"&access_token={Uri.EscapeDataString(token)}";
+        var locationParam = _options.MusicFolderId.HasValue
+            ? $"folderid={_options.MusicFolderId.Value}"
+            : $"path={string.Join("/", folderPath.Split('/').Select(Uri.EscapeDataString))}";
+
+        var url = $"{_tokenStore.GetApiBaseUrl() ?? _options.ApiBaseUrl}/listfolder" +
+                  $"?{locationParam}" +
+                  $"&recursive=1&audio=1" +
+                  $"&auth={Uri.EscapeDataString(token)}";
 
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetFromJsonAsync<PCloudListFolderResponse>(url, cancellationToken)
@@ -66,9 +88,9 @@ public class PCloudApiClient
         var token = _tokenStore.GetToken()
             ?? throw new InvalidOperationException("No pCloud access token.");
 
-        var url = $"{_options.ApiBaseUrl}/getfilelink" +
+        var url = $"{_tokenStore.GetApiBaseUrl() ?? _options.ApiBaseUrl}/getfilelink" +
                   $"?fileid={fileId}" +
-                  $"&access_token={Uri.EscapeDataString(token)}";
+                  $"&auth={Uri.EscapeDataString(token)}";
 
         var client = _httpClientFactory.CreateClient();
         var response = await client.GetFromJsonAsync<PCloudFileLinkResponse>(url, cancellationToken)

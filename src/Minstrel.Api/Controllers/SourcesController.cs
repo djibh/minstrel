@@ -37,11 +37,25 @@ public class SourcesController : ControllerBase
     [HttpPost("pcloud/connect")]
     public async Task<IActionResult> ConnectPCloud([FromBody] PCloudConnectRequest request, CancellationToken cancellationToken)
     {
-        var success = await _pcloudAuth.ConnectAsync(request.Email, request.Password, cancellationToken);
+        try
+        {
+            var result = await _pcloudAuth.ConnectAsync(request.Email, request.Password, request.Code, cancellationToken);
 
-        if (!success)
-            return Unauthorized(new { error = "pCloud authentication failed. Check your credentials." });
+            if (result.RequiresEmailCode)
+                return Ok(new { connected = false, requiresEmailCode = true });
 
+            return Ok(new { connected = true });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+    }
+
+    [HttpPut("pcloud/token")]
+    public IActionResult SetPCloudToken([FromBody] PCloudSetTokenRequest request)
+    {
+        _pcloudAuth.SetToken(request.Token, request.ApiBaseUrl);
         return Ok(new { connected = true });
     }
 

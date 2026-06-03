@@ -20,7 +20,7 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
     private readonly SemaphoreSlim _cacheLock = new(1, 1);
     private const int CacheDurationMinutes = 5;
 
-    public string SourceId => "pcloud-main";
+    public string SourceId => "pcloud";
 
     public PCloudMediaSourceProvider(PCloudApiClient apiClient, PCloudTokenStore tokenStore, IOptions<PCloudOptions> options)
     {
@@ -166,7 +166,7 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
             Title = title,
             ArtistName = artist,
             AlbumTitle = album,
-            DurationSeconds = file.Audio?.Duration,
+            DurationSeconds = file.Audio?.Duration.HasValue == true ? (int)file.Audio.Duration.Value : null,
             CoverUrl = null,
             IsOfflineAvailable = false
         };

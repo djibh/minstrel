@@ -1,3 +1,4 @@
+using Minstrel.Application.Sources;
 using Minstrel.Application.Sources.Interfaces;
 
 namespace Minstrel.Infrastructure.Providers.PCloud;
@@ -15,19 +16,13 @@ public class PCloudAuthService : IPCloudAuthService
 
     public bool IsConnected => _tokenStore.HasToken;
 
-    public async Task<bool> ConnectAsync(string email, string password, CancellationToken cancellationToken)
+    public async Task<PCloudAuthResult> ConnectAsync(string email, string password, string? code, CancellationToken cancellationToken)
     {
-        try
-        {
-            var token = await _apiClient.DirectAuthAsync(email, password, cancellationToken);
-            _tokenStore.SetToken(token);
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
+        var connected = await _apiClient.DirectAuthAsync(email, password, code, cancellationToken);
+        return connected ? PCloudAuthResult.Success() : PCloudAuthResult.CodeRequired();
     }
+
+    public void SetToken(string token, string apiBaseUrl) => _tokenStore.SetToken(token, apiBaseUrl);
 
     public void Disconnect() => _tokenStore.ClearToken();
 }

@@ -31,6 +31,6 @@ public record PCloudAudioMetadata(
     [property: JsonPropertyName("artist")] string? Artist,
     [property: JsonPropertyName("album")] string? Album,
     [property: JsonPropertyName("year")] int? Year,
-    [property: JsonPropertyName("duration")] int? Duration,
+    [property: JsonPropertyName("duration")] double? Duration,
     [property: JsonPropertyName("track")] int? Track
 );
