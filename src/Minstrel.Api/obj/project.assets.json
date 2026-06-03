@@ -1193,11 +1193,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Api/Minstrel.Api.csproj",
+      "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Api/Minstrel.Api.csproj",
       "projectName": "Minstrel.Api",
-      "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Api/Minstrel.Api.csproj",
+      "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Api/Minstrel.Api.csproj",
       "packagesPath": "/Users/djibh/.nuget/packages/",
-      "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Api/obj/",
+      "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/djibh/.nuget/NuGet/NuGet.Config"
@@ -1212,11 +1212,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
-              "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj"
+            "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
+              "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj"
             },
-            "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj": {
-              "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj"
+            "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj": {
+              "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj"
             }
           }
         }

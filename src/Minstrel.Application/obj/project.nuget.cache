@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QYXjEZgwUWw=",
+  "dgSpecHash": "Gc4icXpk5sM=",
   "success": true,
-  "projectFilePath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj",
+  "projectFilePath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

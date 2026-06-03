@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj": {}
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj": {}
   },
   "projects": {
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj": {
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj",
+        "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj",
         "projectName": "Minstrel.UnitTests",
-        "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj",
+        "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj",
         "packagesPath": "/Users/djibh/.nuget/packages/",
-        "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.UnitTests/obj/",
+        "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/tests/Minstrel.UnitTests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/djibh/.nuget/NuGet/NuGet.Config"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {}
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {}
   },
   "projects": {
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
+        "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
         "projectName": "Minstrel.Domain",
-        "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
+        "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
         "packagesPath": "/Users/djibh/.nuget/packages/",
-        "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/",
+        "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/djibh/.nuget/NuGet/NuGet.Config"

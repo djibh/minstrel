@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P8cov9z9Loc=",
+  "dgSpecHash": "TyCe3BuEB4U=",
   "success": true,
-  "projectFilePath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj",
+  "projectFilePath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/tests/Minstrel.UnitTests/Minstrel.UnitTests.csproj",
   "expectedPackageFiles": [
     "/Users/djibh/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
     "/Users/djibh/.nuget/packages/microsoft.codecoverage/17.8.0/microsoft.codecoverage.17.8.0.nupkg.sha512",

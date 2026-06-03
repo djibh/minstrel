@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj": {}
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj": {}
   },
   "projects": {
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj",
+        "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj",
         "projectName": "Minstrel.Application",
-        "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj",
+        "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj",
         "packagesPath": "/Users/djibh/.nuget/packages/",
-        "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/obj/",
+        "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/djibh/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
-                "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj"
+              "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
+                "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj"
               }
             }
           }
@@ -66,14 +66,14 @@
         }
       }
     },
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
+        "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
         "projectName": "Minstrel.Domain",
-        "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
+        "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj",
         "packagesPath": "/Users/djibh/.nuget/packages/",
-        "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/obj/",
+        "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/djibh/.nuget/NuGet/NuGet.Config"
@@ -124,14 +124,14 @@
         }
       }
     },
-    "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj": {
+    "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
+        "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
         "projectName": "Minstrel.Infrastructure",
-        "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
+        "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
         "packagesPath": "/Users/djibh/.nuget/packages/",
-        "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/obj/",
+        "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/djibh/.nuget/NuGet/NuGet.Config"
@@ -146,11 +146,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
-                "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj"
+              "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
+                "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj"
               },
-              "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
-                "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj"
+              "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
+                "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj"
               }
             }
           }

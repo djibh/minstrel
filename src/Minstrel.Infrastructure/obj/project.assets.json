@@ -809,11 +809,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
+      "projectUniqueName": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
       "projectName": "Minstrel.Infrastructure",
-      "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
+      "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/Minstrel.Infrastructure.csproj",
       "packagesPath": "/Users/djibh/.nuget/packages/",
-      "outputPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Infrastructure/obj/",
+      "outputPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/djibh/.nuget/NuGet/NuGet.Config"
@@ -828,11 +828,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
-              "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj"
+            "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj": {
+              "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Application/Minstrel.Application.csproj"
             },
-            "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
-              "projectPath": "/Users/djibh/Documents/Workspace/dotnet/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj"
+            "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj": {
+              "projectPath": "/Users/djibh/Documents/Workspace/Minstrel/Minstrel/src/Minstrel.Domain/Minstrel.Domain.csproj"
             }
           }
         }
