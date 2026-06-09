@@ -3,5 +3,6 @@
 public enum SourceKind
 {
     Local,
-    PCloud
+    PCloud,
+    WebDav
 }
