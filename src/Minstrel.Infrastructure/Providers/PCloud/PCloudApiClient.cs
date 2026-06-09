@@ -1,5 +1,4 @@
 using System.Net.Http.Json;
-using Microsoft.Extensions.Options;
 using Minstrel.Infrastructure.Providers.PCloud.Models;
 
 namespace Minstrel.Infrastructure.Providers.PCloud;
@@ -7,99 +6,146 @@ namespace Minstrel.Infrastructure.Providers.PCloud;
 public class PCloudApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly PCloudTokenStore _tokenStore;
-    private readonly PCloudOptions _options;
+    private readonly PCloudConfigStore _configStore;
+    private readonly SemaphoreSlim _authLock = new(1, 1);
 
     private static readonly HashSet<string> AudioExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
         ".mp3", ".flac", ".aac", ".ogg", ".wav", ".m4a", ".opus", ".wma", ".aiff"
     };
 
-    public PCloudApiClient(IHttpClientFactory httpClientFactory, PCloudTokenStore tokenStore, IOptions<PCloudOptions> options)
+    public PCloudApiClient(IHttpClientFactory httpClientFactory, PCloudConfigStore configStore)
     {
         _httpClientFactory = httpClientFactory;
-        _tokenStore = tokenStore;
-        _options = options.Value;
+        _configStore = configStore;
     }
 
-    public async Task<bool> DirectAuthAsync(string email, string password, string? code, CancellationToken cancellationToken)
+    public async Task<List<PCloudItem>> ListAudioFilesAsync(CancellationToken cancellationToken)
     {
-        var response = await CallUserInfoAsync(_options.ApiBaseUrl, email, password, code, cancellationToken);
-        var resolvedBase = _options.ApiBaseUrl;
+        var token = await GetOrRefreshTokenAsync(cancellationToken);
+        var config = _configStore.Current;
 
-        // 1022 + hostname → wrong regional server, retry with the correct one
-        if (response.Result == 1022 && response.Hostname is not null)
-        {
-            resolvedBase = $"https://{response.Hostname}";
-            response = await CallUserInfoAsync(resolvedBase, email, password, code, cancellationToken);
-        }
-
-        // 1022 without hostname → email verification code required
-        if (response.Result == 1022 && response.Hostname is null)
-            return false;
-
-        if (response.Result != 0 || response.AccessToken is null)
-            throw new InvalidOperationException($"pCloud auth error (result={response.Result}): {response.Error}");
-
-        _tokenStore.SetToken(response.AccessToken, resolvedBase);
-        return true;
-    }
-
-    private async Task<PCloudUserInfoResponse> CallUserInfoAsync(string baseUrl, string email, string password, string? code, CancellationToken cancellationToken)
-    {
-        var url = $"{baseUrl}/userinfo?getauth=1" +
-                  $"&username={Uri.EscapeDataString(email)}" +
-                  $"&password={Uri.EscapeDataString(password)}" +
-                  (code is not null ? $"&code={Uri.EscapeDataString(code)}" : "");
-
-        var client = _httpClientFactory.CreateClient();
-        return await client.GetFromJsonAsync<PCloudUserInfoResponse>(url, cancellationToken)
-            ?? throw new InvalidOperationException("Empty response from pCloud userinfo.");
-    }
-
-    public async Task<List<PCloudItem>> ListAudioFilesAsync(string folderPath, CancellationToken cancellationToken)
-    {
-        var token = _tokenStore.GetToken()
-            ?? throw new InvalidOperationException("No pCloud access token.");
-
-        var locationParam = _options.MusicFolderId.HasValue
-            ? $"folderid={_options.MusicFolderId.Value}"
-            : $"path={string.Join("/", folderPath.Split('/').Select(Uri.EscapeDataString))}";
-
-        var url = $"{_tokenStore.GetApiBaseUrl() ?? _options.ApiBaseUrl}/listfolder" +
-                  $"?{locationParam}" +
-                  $"&recursive=1&audio=1" +
+        var url = $"{config.ApiBaseUrl}/listfolder" +
+                  $"?path={Uri.EscapeDataString(config.MusicFolderPath)}" +
+                  $"&recursive=1" +
                   $"&auth={Uri.EscapeDataString(token)}";
 
-        var client = _httpClientFactory.CreateClient();
-        var response = await client.GetFromJsonAsync<PCloudListFolderResponse>(url, cancellationToken)
-            ?? throw new InvalidOperationException("Empty response from pCloud listfolder.");
+        return await ExecuteWithTokenRetryAsync(token, async t =>
+        {
+            var u = $"{config.ApiBaseUrl}/listfolder" +
+                    $"?path={Uri.EscapeDataString(config.MusicFolderPath)}" +
+                    $"&recursive=1" +
+                    $"&auth={Uri.EscapeDataString(t)}";
 
-        if (response.Result != 0)
-            throw new InvalidOperationException($"pCloud listfolder error (result={response.Result}).");
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetFromJsonAsync<PCloudListFolderResponse>(u, cancellationToken)
+                ?? throw new InvalidOperationException("Empty response from pCloud listfolder.");
 
-        var audioFiles = new List<PCloudItem>();
-        CollectAudioFiles(response.Metadata?.Contents, audioFiles);
-        return audioFiles;
+            if (response.Result != 0)
+                throw new PCloudApiException(response.Result, $"pCloud listfolder error (result={response.Result}).");
+
+            var audioFiles = new List<PCloudItem>();
+            CollectAudioFiles(response.Metadata?.Contents, audioFiles);
+            return audioFiles;
+        }, cancellationToken);
     }
 
     public async Task<string> GetFileLinkAsync(long fileId, CancellationToken cancellationToken)
     {
-        var token = _tokenStore.GetToken()
-            ?? throw new InvalidOperationException("No pCloud access token.");
+        var config = _configStore.Current;
 
-        var url = $"{_tokenStore.GetApiBaseUrl() ?? _options.ApiBaseUrl}/getfilelink" +
-                  $"?fileid={fileId}" +
-                  $"&auth={Uri.EscapeDataString(token)}";
+        return await ExecuteWithTokenRetryAsync(await GetOrRefreshTokenAsync(cancellationToken), async t =>
+        {
+            var url = $"{config.ApiBaseUrl}/getfilelink" +
+                      $"?fileid={fileId}" +
+                      $"&auth={Uri.EscapeDataString(t)}";
+
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetFromJsonAsync<PCloudFileLinkResponse>(url, cancellationToken)
+                ?? throw new InvalidOperationException("Empty response from pCloud getfilelink.");
+
+            if (response.Result != 0 || response.Hosts is null || response.Path is null)
+                throw new PCloudApiException(response.Result, $"pCloud getfilelink error (result={response.Result}).");
+
+            return $"https://{response.Hosts[0]}{response.Path}";
+        }, cancellationToken);
+    }
+
+    public async Task<PCloudAuthResult> AuthenticateAsync(string? verificationCode, CancellationToken cancellationToken)
+    {
+        await _configStore.UpdateTokenAsync(string.Empty);
+        try
+        {
+            await DoAuthenticateAsync(verificationCode, cancellationToken);
+            return PCloudAuthResult.Success;
+        }
+        catch (PCloudApiException ex) when (ex.ResultCode == 1022)
+        {
+            return PCloudAuthResult.VerificationRequired;
+        }
+        catch (Exception ex)
+        {
+            return PCloudAuthResult.Failure(ex.Message);
+        }
+    }
+
+    private async Task<string> GetOrRefreshTokenAsync(CancellationToken cancellationToken)
+    {
+        var token = _configStore.Current.AuthToken;
+        if (!string.IsNullOrWhiteSpace(token))
+            return token;
+
+        await _authLock.WaitAsync(cancellationToken);
+        try
+        {
+            token = _configStore.Current.AuthToken;
+            if (!string.IsNullOrWhiteSpace(token))
+                return token;
+
+            return await DoAuthenticateAsync(null, cancellationToken);
+        }
+        finally
+        {
+            _authLock.Release();
+        }
+    }
+
+    private async Task<string> DoAuthenticateAsync(string? verificationCode, CancellationToken cancellationToken)
+    {
+        var config = _configStore.Current;
+        var url = $"{config.ApiBaseUrl}/userinfo?getauth=1" +
+                  $"&username={Uri.EscapeDataString(config.Email)}" +
+                  $"&password={Uri.EscapeDataString(config.Password)}";
+
+        if (!string.IsNullOrWhiteSpace(verificationCode))
+            url += $"&code={Uri.EscapeDataString(verificationCode)}";
 
         var client = _httpClientFactory.CreateClient();
-        var response = await client.GetFromJsonAsync<PCloudFileLinkResponse>(url, cancellationToken)
-            ?? throw new InvalidOperationException("Empty response from pCloud getfilelink.");
+        var response = await client.GetFromJsonAsync<PCloudUserInfoResponse>(url, cancellationToken)
+            ?? throw new InvalidOperationException("Empty response from pCloud userinfo.");
 
-        if (response.Result != 0 || response.Hosts is null || response.Path is null)
-            throw new InvalidOperationException($"pCloud getfilelink error (result={response.Result}).");
+        if (response.Result == 1022)
+            throw new PCloudApiException(1022, "pCloud email verification required.");
 
-        return $"https://{response.Hosts[0]}{response.Path}";
+        if (response.Result != 0 || string.IsNullOrWhiteSpace(response.Auth))
+            throw new InvalidOperationException($"pCloud auth error (result={response.Result}): {response.Error}");
+
+        await _configStore.UpdateTokenAsync(response.Auth);
+        return response.Auth;
+    }
+
+    private async Task<T> ExecuteWithTokenRetryAsync<T>(string token, Func<string, Task<T>> action, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await action(token);
+        }
+        catch (PCloudApiException ex) when (ex.ResultCode is 1000 or 2000 or 2094)
+        {
+            await _configStore.UpdateTokenAsync(string.Empty);
+            var refreshed = await GetOrRefreshTokenAsync(cancellationToken);
+            return await action(refreshed);
+        }
     }
 
     private static void CollectAudioFiles(List<PCloudItem>? items, List<PCloudItem> result)
@@ -120,7 +166,22 @@ public class PCloudApiClient
         if (item.ContentType?.StartsWith("audio/", StringComparison.OrdinalIgnoreCase) == true)
             return true;
 
-        var extension = Path.GetExtension(item.Name);
-        return AudioExtensions.Contains(extension);
+        return AudioExtensions.Contains(Path.GetExtension(item.Name));
     }
+}
+
+internal sealed class PCloudApiException(int resultCode, string message) : InvalidOperationException(message)
+{
+    public int ResultCode { get; } = resultCode;
+}
+
+public sealed class PCloudAuthResult
+{
+    public bool Connected { get; private init; }
+    public bool RequiresVerification { get; private init; }
+    public string? Error { get; private init; }
+
+    public static readonly PCloudAuthResult Success = new() { Connected = true };
+    public static readonly PCloudAuthResult VerificationRequired = new() { RequiresVerification = true };
+    public static PCloudAuthResult Failure(string error) => new() { Error = error };
 }

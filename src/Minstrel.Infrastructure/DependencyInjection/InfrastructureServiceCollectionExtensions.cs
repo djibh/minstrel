@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Minstrel.Application.Abstractions.Providers;
-using Minstrel.Application.Sources.Interfaces;
 using Minstrel.Domain.Interfaces;
 using Minstrel.Infrastructure.Providers.PCloud;
 using Minstrel.Infrastructure.Sources;
@@ -13,9 +12,8 @@ public static class InfrastructureServiceCollectionExtensions
     {
         services.AddHttpClient();
         services.AddOptions<PCloudOptions>().BindConfiguration(PCloudOptions.SectionName);
-        services.AddSingleton<PCloudTokenStore>();
+        services.AddSingleton<PCloudConfigStore>();
         services.AddSingleton<PCloudApiClient>();
-        services.AddSingleton<IPCloudAuthService, PCloudAuthService>();
         services.AddSingleton<IMediaSourceProvider, PCloudMediaSourceProvider>();
         services.AddSingleton<ISourceRegistry, SourceRegistry>();
 

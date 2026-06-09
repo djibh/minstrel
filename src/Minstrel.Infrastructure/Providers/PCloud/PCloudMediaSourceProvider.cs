@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Extensions.Options;
 using Minstrel.Domain.Entities;
 using Minstrel.Domain.Enums;
 using Minstrel.Domain.Interfaces;
@@ -12,21 +11,20 @@ namespace Minstrel.Infrastructure.Providers.PCloud;
 public class PCloudMediaSourceProvider : IMediaSourceProvider
 {
     private readonly PCloudApiClient _apiClient;
-    private readonly PCloudTokenStore _tokenStore;
-    private readonly PCloudOptions _options;
+    private readonly PCloudConfigStore _configStore;
 
     private List<PCloudItem>? _cachedFiles;
     private DateTime _cacheExpiry = DateTime.MinValue;
+    private string? _cachedForCode;
     private readonly SemaphoreSlim _cacheLock = new(1, 1);
     private const int CacheDurationMinutes = 5;
 
     public string SourceId => "pcloud";
 
-    public PCloudMediaSourceProvider(PCloudApiClient apiClient, PCloudTokenStore tokenStore, IOptions<PCloudOptions> options)
+    public PCloudMediaSourceProvider(PCloudApiClient apiClient, PCloudConfigStore configStore)
     {
         _apiClient = apiClient;
-        _tokenStore = tokenStore;
-        _options = options.Value;
+        _configStore = configStore;
     }
 
     public Task<MediaSource> GetSourceAsync(CancellationToken cancellationToken)
@@ -35,13 +33,13 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
             Id = SourceId,
             Kind = SourceKind.PCloud,
             DisplayName = "pCloud",
-            IsEnabled = _tokenStore.HasToken,
+            IsEnabled = _configStore.Current.IsConfigured,
             SyncStatus = SourceSyncStatus.Idle
         });
 
     public async Task<IReadOnlyCollection<Album>> GetAlbumsAsync(CancellationToken cancellationToken)
     {
-        if (!_tokenStore.HasToken) return [];
+        if (!_configStore.Current.IsConfigured) return [];
 
         var files = await GetCachedAudioFilesAsync(cancellationToken);
 
@@ -65,7 +63,7 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
 
     public async Task<IReadOnlyCollection<Artist>> GetArtistsAsync(CancellationToken cancellationToken)
     {
-        if (!_tokenStore.HasToken) return [];
+        if (!_configStore.Current.IsConfigured) return [];
 
         var files = await GetCachedAudioFilesAsync(cancellationToken);
 
@@ -87,7 +85,7 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
 
     public async Task<IReadOnlyCollection<Track>> GetTracksAsync(CancellationToken cancellationToken)
     {
-        if (!_tokenStore.HasToken) return [];
+        if (!_configStore.Current.IsConfigured) return [];
 
         var files = await GetCachedAudioFilesAsync(cancellationToken);
         return files.Select(MapToTrack).ToList();
@@ -98,7 +96,7 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
 
     public async Task<SearchResults> SearchAsync(string query, CancellationToken cancellationToken)
     {
-        if (!_tokenStore.HasToken) return new SearchResults { Query = query };
+        if (!_configStore.Current.IsConfigured) return new SearchResults { Query = query };
 
         var normalized = query.Trim().ToLowerInvariant();
         var files = await GetCachedAudioFilesAsync(cancellationToken);
@@ -135,17 +133,21 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
 
     private async Task<List<PCloudItem>> GetCachedAudioFilesAsync(CancellationToken cancellationToken)
     {
-        if (_cachedFiles is not null && DateTime.UtcNow < _cacheExpiry)
+        var config = _configStore.Current;
+
+        if (_cachedFiles is not null && DateTime.UtcNow < _cacheExpiry && _cachedForCode == config.Email)
             return _cachedFiles;
 
         await _cacheLock.WaitAsync(cancellationToken);
         try
         {
-            if (_cachedFiles is not null && DateTime.UtcNow < _cacheExpiry)
+            config = _configStore.Current;
+            if (_cachedFiles is not null && DateTime.UtcNow < _cacheExpiry && _cachedForCode == config.Email)
                 return _cachedFiles;
 
-            _cachedFiles = await _apiClient.ListAudioFilesAsync(_options.MusicFolderPath, cancellationToken);
+            _cachedFiles = await _apiClient.ListAudioFilesAsync(cancellationToken);
             _cacheExpiry = DateTime.UtcNow.AddMinutes(CacheDurationMinutes);
+            _cachedForCode = config.Email;
             return _cachedFiles;
         }
         finally
@@ -175,13 +177,7 @@ public class PCloudMediaSourceProvider : IMediaSourceProvider
     private static (string title, string artist, string album) ParseMetadata(PCloudItem file)
     {
         if (file.Audio is { Title: not null } audio)
-        {
-            return (
-                audio.Title,
-                audio.Artist ?? "Unknown Artist",
-                audio.Album ?? "Unknown Album"
-            );
-        }
+            return (audio.Title, audio.Artist ?? "Unknown Artist", audio.Album ?? "Unknown Album");
 
         var nameWithoutExt = Path.GetFileNameWithoutExtension(file.Name);
         var parts = nameWithoutExt.Split(" - ", StringSplitOptions.TrimEntries);
