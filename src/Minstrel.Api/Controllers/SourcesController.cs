@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Minstrel.Api.Contracts.Sources;
 using Minstrel.Api.Mapping;
 using Minstrel.Application.Abstractions.Providers;
-using Minstrel.Application.Sources.Interfaces;
+using Minstrel.Infrastructure.Providers.PCloud;
 
 namespace Minstrel.Api.Controllers;
 
@@ -11,12 +11,14 @@ namespace Minstrel.Api.Controllers;
 public class SourcesController : ControllerBase
 {
     private readonly ISourceRegistry _sourceRegistry;
-    private readonly IPCloudAuthService _pcloudAuth;
+    private readonly PCloudConfigStore _configStore;
+    private readonly PCloudApiClient _apiClient;
 
-    public SourcesController(ISourceRegistry sourceRegistry, IPCloudAuthService pcloudAuth)
+    public SourcesController(ISourceRegistry sourceRegistry, PCloudConfigStore configStore, PCloudApiClient apiClient)
     {
         _sourceRegistry = sourceRegistry;
-        _pcloudAuth = pcloudAuth;
+        _configStore = configStore;
+        _apiClient = apiClient;
     }
 
     [HttpGet]
@@ -34,39 +36,45 @@ public class SourcesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("pcloud/connect")]
-    public async Task<IActionResult> ConnectPCloud([FromBody] PCloudConnectRequest request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var result = await _pcloudAuth.ConnectAsync(request.Email, request.Password, request.Code, cancellationToken);
-
-            if (result.RequiresEmailCode)
-                return Ok(new { connected = false, requiresEmailCode = true });
-
-            return Ok(new { connected = true });
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { error = ex.Message });
-        }
-    }
-
-    [HttpPut("pcloud/token")]
-    public IActionResult SetPCloudToken([FromBody] PCloudSetTokenRequest request)
-    {
-        _pcloudAuth.SetToken(request.Token, request.ApiBaseUrl);
-        return Ok(new { connected = true });
-    }
-
     [HttpGet("pcloud/status")]
     public IActionResult GetPCloudStatus()
-        => Ok(new { connected = _pcloudAuth.IsConnected });
+        => Ok(new { connected = _configStore.Current.IsConfigured });
 
-    [HttpDelete("pcloud")]
-    public IActionResult DisconnectPCloud()
+    [HttpGet("pcloud/config")]
+    public IActionResult GetPCloudConfig()
     {
-        _pcloudAuth.Disconnect();
-        return NoContent();
+        var config = _configStore.Current;
+        return Ok(new
+        {
+            isConfigured = config.IsConfigured,
+            apiBaseUrl = config.ApiBaseUrl,
+            email = config.Email,
+            musicFolderPath = config.MusicFolderPath,
+        });
+    }
+
+    [HttpPut("pcloud/config")]
+    public async Task<IActionResult> UpdatePCloudConfig(
+        [FromBody] PCloudConfigRequest request,
+        CancellationToken cancellationToken)
+    {
+        var apiBaseUrl = request.ApiBaseUrl ?? "https://api.pcloud.com";
+        var email = request.Email?.Trim() ?? string.Empty;
+        var password = request.Password ?? string.Empty;
+        var folderPath = string.IsNullOrWhiteSpace(request.MusicFolderPath) ? "/" : request.MusicFolderPath.Trim();
+
+        await _configStore.UpdateAsync(apiBaseUrl, email, password, folderPath);
+
+        if (!_configStore.Current.IsConfigured)
+            return Ok(new { connected = false });
+
+        var result = await _apiClient.AuthenticateAsync(request.VerificationCode, cancellationToken);
+
+        return Ok(new
+        {
+            connected = result.Connected,
+            requiresVerification = result.RequiresVerification,
+            error = result.Error,
+        });
     }
 }
